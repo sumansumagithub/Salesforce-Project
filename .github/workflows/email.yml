@@ -36,5 +36,6 @@ jobs:
         body: |
           This is a test email sent from GitHub Actions with an attachment.
         to: sumas1403@gmail.com
+        from: sumankumary5454@gmail.com
         attachments: |
           file.txt
