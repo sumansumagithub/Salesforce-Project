@@ -1,0 +1,40 @@
+name: Send Email
+
+on:
+  workflow_dispatch:
+  push:
+     branches:
+      - main
+
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create file
+      run: |
+
+        # Create the file
+        touch file.txt
+
+        # Write some content to the file
+        echo "Love you Suma" >> file.txt
+
+        # Display a message to confirm that the file was created
+        echo "File created: file.txt"
+
+      # ... do build/test steps here to generate the artifact ...
+
+    - name: Send email with attachment
+      uses: dawidd6/action-send-mail@v3.1.0
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
+        subject: Test email with attachment
+        body: |
+          This is a test email sent from GitHub Actions with an attachment.
+        to: sumas1403@gmail.com
+        attachments: |
+          file.txt
